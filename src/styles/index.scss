@@ -13,10 +13,54 @@
 */
 
 body {
-    background-color: grey;
+    background-color: #5e5955;
+    text-align: center;
+    color: white;
+}
+
+.view1 {
+    height: 100%;
 }
 
 .block {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
+}
+
+.card {
+    width: 650px;
+}
+
+.card-color {
+    background-color: #4a433b;
+}
+
+.button-player1 {
+    width: 75px;
+    height: 75px;
+    color: #e5db82;
+    background-color: #413a34;
+}
+
+.button-player2 {
+    width: 75px;
+    height: 75px;
+    color: #43a6d5;
+    background-color: #413a34;
+}
+
+.border-top {
+    border-top: 1px solid #7a7a7a !important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #7a7a7a !important;
+}
+
+.border-right {
+    border-right: 1px solid #7a7a7a !important;
+}
+
+.border-left {
+    border-left: 1px solid #7a7a7a !important;
 }
