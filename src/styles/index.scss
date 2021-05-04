@@ -38,15 +38,25 @@ body {
 .button-player1 {
     width: 75px;
     height: 75px;
+    border: none;
     color: #e5db82;
     background-color: #413a34;
+}
+
+.button-player1:hover {
+    background-color: #5a5550;
 }
 
 .button-player2 {
     width: 75px;
     height: 75px;
+    border: none;
     color: #43a6d5;
     background-color: #413a34;
+}
+
+.button-player2:hover {
+    background-color: #5a5550;
 }
 
 .border-top {

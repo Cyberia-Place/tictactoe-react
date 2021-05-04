@@ -37,12 +37,12 @@ export const Interface = () => {
 						<input type="text" placeholder="Player 2 username" />
 
 						<div className="d-flex justify-content-center">
-							<div className="button-player1 display-4 mx-3 my-3 text-center">
+							<button className="button-player1 display-4 mx-3 my-3 text-center">
 								<b>X</b>
-							</div>
-							<div className="button-player2 display-4 mx-3 my-3 text-center">
+							</button>
+							<button className="button-player2 display-4 mx-3 my-3 text-center">
 								<b>O</b>
-							</div>
+							</button>
 						</div>
 					</div>
 				</div>
