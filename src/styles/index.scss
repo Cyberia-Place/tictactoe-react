@@ -26,7 +26,13 @@ body {
 
 .block {
     height: 150px;
-    width: 150px;
+    width: 33.3%;
+    border: 1px solid white;
+}
+
+.text-decoration {
+    text-align: center;
+    color: #7c8c6c;
 }
 
 .card {
