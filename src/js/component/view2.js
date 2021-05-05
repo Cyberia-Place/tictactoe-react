@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 
 export const View2 = props => {
 	let i = 0;
-	const [turn, setTurn] = useState({ __html: "" });
+	const [turn, setTurn] = useState({ __html: props.player });
 
 	const putMark = () => {
+		console.log(props.player);
 		if (props.player == "X") {
 			let total_turns = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
 			setTurn({ __html: total_turns[i] });
@@ -19,7 +20,7 @@ export const View2 = props => {
 
 	return (
 		<div className="container">
-			<h2>It is {props.player} Turn!</h2>
+			<h2>It is {Object.values(turn)[0]} Turn!</h2>
 			<div className="mx-auto mt-4">
 				<div className="row justify-content-center">
 					<div
