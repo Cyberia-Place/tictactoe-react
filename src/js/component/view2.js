@@ -8,6 +8,7 @@ export const View2 = props => {
 	const [turn, setTurn] = useState(props.player);
 	// Estado que determina el encabezado, dice el turno o el ganador
 	const [winner, setWinner] = useState(`It is ${turn} turn!`);
+	const [casilla, setCasillas] = useState(total_casillas);
 	// Función que evalua el ganador y actualiza el estado winner
 	const evaluateWinner = () => {
 		let ind = 0;
@@ -44,20 +45,26 @@ export const View2 = props => {
 		total_turns = ["O", "X", "O", "X", "O", "X", "O", "X", "O"];
 	}
 
-	useEffect(() => {
-		total_casillas[casilla] = turn;
-	}, [turn]);
-	console.log(tot"Total turns: ", al_turns);
-	let casilla = "";
 	// Pone la marca en la casilla y evalua si hay un ganador
 	const putMark = index => {
-		casilla = index;
-		setTurn(total_turns[i]);
+		setTurn({ turn: total_turns[i], position: index });
+
 		i++;
-		console.log("Turn: ", turn, "Total turns: ", total_turns[i], "i: ", i);
-		console.log(total_casillas);
 		evaluateWinner();
 	};
+
+	useEffect(() => {
+		total_casillas[turn.position] = turn.turn;
+		setCasillas(total_casillas);
+		console.log(
+			"Total turns: ",
+			total_turns,
+			"Total casillas: ",
+			total_casillas,
+			"Caslla: ",
+			casilla
+		);
+	}, [turn]);
 
 	const tablero = total_casillas.map((item, index) => {
 		return (
