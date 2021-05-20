@@ -5,7 +5,6 @@ export const View1 = () => {
 	const [display1, setDisplay1] = useState("d-block");
 	const [display2, setDisplay2] = useState("d-none");
 	const [player, setPlayer] = useState("");
-	console.log(player);
 
 	return (
 		<div>
