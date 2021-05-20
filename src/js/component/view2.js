@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 let total_casillas = Array(9).fill("");
 let i = 0;
-
 export const View2 = props => {
+	// Determina el turno actual, es actualizada por la función putMark
+	const [turn, setTurn] = useState(props.player);
+
+	// useEffect(() => {
+	// }, []);
+
+	// Estado que determina el encabezado, dice el turno o el ganador
+	const [winner, setWinner] = useState(`It is ${turn} turn!`);
+	console.log(turn, "Turn", props.player);
+	// Función que evalua el ganador y actualiza el estado winner
 	const evaluateWinner = () => {
 		let ind = 0;
 		let ind2 = 0;
@@ -13,7 +22,6 @@ export const View2 = props => {
 				total_casillas[0 + ind] +
 				total_casillas[1 + ind] +
 				total_casillas[2 + ind];
-
 			let columna =
 				total_casillas[0 + ind2] +
 				total_casillas[3 + ind2] +
@@ -23,17 +31,17 @@ export const View2 = props => {
 				((fila == "XXX" || fila == "OOO") && fila !== "") ||
 				((columna == "XXX" || columna == "OOO") && columna != "")
 			) {
-				alert(`${turn} Wins`);
+				setWinner(`${turn} Wins!`);
 				break;
 			} else {
 				ind += 3;
 				ind2 += 1;
+				setWinner(`It is ${turn} turn!`);
 			}
 		}
 	};
 
-	const [turn, setTurn] = useState(props.player);
-	let encabezado = `It is ${turn} turn!`;
+	// Función que pone la marca en la casilla y activa la función evaluateWinner() para evaluar si hay un ganador
 	const putMark = casilla => {
 		if (props.player == "X") {
 			let total_turns = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
@@ -61,7 +69,7 @@ export const View2 = props => {
 
 	return (
 		<div className="container">
-			<h2>{encabezado}</h2>
+			<h2>{winner}</h2>
 			<div className="mx-auto mt-4">
 				<div className="row mx-auto" style={{ width: "60%" }}>
 					{tablero}
