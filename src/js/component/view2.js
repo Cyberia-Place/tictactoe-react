@@ -16,7 +16,7 @@ export const View2 = ({ player }) => {
 	const [winner, setWinner] = useState("");
 
 	useEffect(() => {
-		setWinner(`It is ${player} turn!`);
+		setWinner(`It is ${total_turns[i]} turn!`);
 	}, [player]);
 
 	// Función que evalua el ganador y actualiza el estado winner
@@ -37,7 +37,7 @@ export const View2 = ({ player }) => {
 				((fila == "XXX" || fila == "OOO") && fila !== "") ||
 				((columna == "XXX" || columna == "OOO") && columna != "")
 			) {
-				setWinner(`${total_turns[i]} Wins!`);
+				setWinner(`${total_turns[i - 1]} Wins!`);
 				break;
 			} else {
 				ind += 3;
@@ -46,14 +46,14 @@ export const View2 = ({ player }) => {
 			}
 		}
 	};
-
+	console.log(total_turns);
 	// Pone la marca en la casilla y evalua si hay un ganador
 	const putMark = index => {
 		if (i < 9) {
 			total_casillas[index] = total_turns[i];
-			console.log(total_casillas[index]);
-			evaluateWinner();
+			console.log(total_casillas);
 			i++;
+			evaluateWinner();
 		}
 	};
 
