@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-let total_casillas = Array(9).fill("");
+let total_casillas = Array(9).fill("?");
 let i = 0;
 export const View2 = props => {
+	// Define el ordenamiento de los turnos para la partida
+	let total_turns = [];
+	if (props.player == "X") {
+		total_turns = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
+	} else {
+		total_turns = ["O", "X", "O", "X", "O", "X", "O", "X", "O"];
+	}
+
 	// Determina el turno actual, es actualizada por la función putMark
-	const [turn, setTurn] = useState({ turn: props.player, position: "" });
-	// Estado que determina el encabezado, dice el turno o el ganador
-	const [winner, setWinner] = useState(`It is ${turn.turn} turn!`);
-	console.log(winner);
+	const [turn, setTurn] = useState(total_turns[i]);
+	// Determina la marca que va en cada casilla
 	const [casilla, setCasillas] = useState(total_casillas);
+	// Estado que determina el encabezado, dice el turno o el ganador
+	const [winner, setWinner] = useState(`It is ${turn} turn!`);
+	console.log(turn, winner);
 	// Función que evalua el ganador y actualiza el estado winner
 	const evaluateWinner = () => {
 		let ind = 0;
@@ -38,41 +47,26 @@ export const View2 = props => {
 		}
 	};
 
-	// Define el ordenamiento de los turnos para la partida
-	let total_turns = [];
-	if (props.player == "X") {
-		total_turns = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
-	} else {
-		total_turns = ["O", "X", "O", "X", "O", "X", "O", "X", "O"];
-	}
-
 	// Pone la marca en la casilla y evalua si hay un ganador
 	const putMark = index => {
-		setTurn({ turn: total_turns[i], position: index });
-		i++;
-		evaluateWinner();
+		if (i < 9) {
+			total_casillas[index] = total_turns[i];
+			setTurn(total_turns[i]);
+			i++;
+			evaluateWinner();
+		}
 	};
 
-	useEffect(() => {
-		total_casillas[turn.position] = turn.turn;
-		setCasillas(total_casillas);
-		console.log(
-			"Turn: ",
-			turn,
-			"Total casillas: ",
-			total_casillas,
-			"Caslla: ",
-			casilla
-		);
-	}, [turn]);
+	// useEffect(() => {}, [turn]);
 
 	const tablero = total_casillas.map((item, index) => {
 		return (
 			<div
 				key={index}
 				className="col-sm-4 col-md-4 col-lg-4 block display-1 text-decoration"
-				dangerouslySetInnerHTML={{ __html: total_casillas[index] }}
-				onClick={() => putMark(index)}></div>
+				onClick={() => putMark(index)}>
+				{casilla[index]}
+			</div>
 		);
 	});
 
