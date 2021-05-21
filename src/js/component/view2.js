@@ -12,19 +12,12 @@ export const View2 = ({ player }) => {
 		total_turns = ["O", "X", "O", "X", "O", "X", "O", "X", "O"];
 	}
 
-	// Determina el turno actual, es actualizada por la función putMark
-	const [turn, setTurn] = useState("");
-
 	// Estado que determina el encabezado, dice el turno o el ganador
-	const [winner, setWinner] = useState(`It is ${turn} turn!`);
+	const [winner, setWinner] = useState("");
 
 	useEffect(() => {
-		setTurn(player);
 		setWinner(`It is ${player} turn!`);
-		console.log("Effect player: ", player);
 	}, [player]);
-
-	console.log("Player: ", player, "Turn: ", turn);
 
 	// Función que evalua el ganador y actualiza el estado winner
 	const evaluateWinner = () => {
@@ -44,12 +37,12 @@ export const View2 = ({ player }) => {
 				((fila == "XXX" || fila == "OOO") && fila !== "") ||
 				((columna == "XXX" || columna == "OOO") && columna != "")
 			) {
-				setWinner(`${turn} Wins!`);
+				setWinner(`${total_turns[i]} Wins!`);
 				break;
 			} else {
 				ind += 3;
 				ind2 += 1;
-				setWinner(`It is ${turn} turn!`);
+				setWinner(`It is ${total_turns[i]} turn!`);
 			}
 		}
 	};
@@ -59,9 +52,8 @@ export const View2 = ({ player }) => {
 		if (i < 9) {
 			total_casillas[index] = total_turns[i];
 			console.log(total_casillas[index]);
-			setTurn(total_turns[i]);
-			i++;
 			evaluateWinner();
+			i++;
 		}
 	};
 
