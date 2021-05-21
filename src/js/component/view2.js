@@ -5,9 +5,10 @@ let total_casillas = Array(9).fill("");
 let i = 0;
 export const View2 = props => {
 	// Determina el turno actual, es actualizada por la función putMark
-	const [turn, setTurn] = useState(props.player);
+	const [turn, setTurn] = useState({ turn: props.player, position: "" });
 	// Estado que determina el encabezado, dice el turno o el ganador
-	const [winner, setWinner] = useState(`It is ${turn} turn!`);
+	const [winner, setWinner] = useState(`It is ${turn.turn} turn!`);
+	console.log(winner);
 	const [casilla, setCasillas] = useState(total_casillas);
 	// Función que evalua el ganador y actualiza el estado winner
 	const evaluateWinner = () => {
@@ -48,7 +49,6 @@ export const View2 = props => {
 	// Pone la marca en la casilla y evalua si hay un ganador
 	const putMark = index => {
 		setTurn({ turn: total_turns[i], position: index });
-
 		i++;
 		evaluateWinner();
 	};
@@ -57,8 +57,8 @@ export const View2 = props => {
 		total_casillas[turn.position] = turn.turn;
 		setCasillas(total_casillas);
 		console.log(
-			"Total turns: ",
-			total_turns,
+			"Turn: ",
+			turn,
 			"Total casillas: ",
 			total_casillas,
 			"Caslla: ",
