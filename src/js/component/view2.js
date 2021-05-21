@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-let total_casillas = Array(9).fill("?");
+let total_casillas = Array(9).fill("");
 let i = 0;
-export const View2 = props => {
+export const View2 = ({ player }) => {
 	// Define el ordenamiento de los turnos para la partida
 	let total_turns = [];
-	if (props.player == "X") {
+	if (player == "X") {
 		total_turns = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
-	} else {
+	} else if (player == "O") {
 		total_turns = ["O", "X", "O", "X", "O", "X", "O", "X", "O"];
 	}
 
 	// Determina el turno actual, es actualizada por la función putMark
-	const [turn, setTurn] = useState(total_turns[i]);
-	// Determina la marca que va en cada casilla
-	const [casilla, setCasillas] = useState(total_casillas);
+	const [turn, setTurn] = useState("");
+
 	// Estado que determina el encabezado, dice el turno o el ganador
 	const [winner, setWinner] = useState(`It is ${turn} turn!`);
-	console.log(turn, winner);
+
+	useEffect(() => {
+		setTurn(player);
+		setWinner(`It is ${player} turn!`);
+		console.log("Effect player: ", player);
+	}, [player]);
+
+	console.log("Player: ", player, "Turn: ", turn);
+
 	// Función que evalua el ganador y actualiza el estado winner
 	const evaluateWinner = () => {
 		let ind = 0;
@@ -51,13 +58,12 @@ export const View2 = props => {
 	const putMark = index => {
 		if (i < 9) {
 			total_casillas[index] = total_turns[i];
+			console.log(total_casillas[index]);
 			setTurn(total_turns[i]);
 			i++;
 			evaluateWinner();
 		}
 	};
-
-	// useEffect(() => {}, [turn]);
 
 	const tablero = total_casillas.map((item, index) => {
 		return (
@@ -65,7 +71,7 @@ export const View2 = props => {
 				key={index}
 				className="col-sm-4 col-md-4 col-lg-4 block display-1 text-decoration"
 				onClick={() => putMark(index)}>
-				{casilla[index]}
+				{item}
 			</div>
 		);
 	});

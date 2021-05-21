@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View2 } from "./view2.js";
 
 export const View1 = () => {
-	const [display1, setDisplay1] = useState("d-block");
-	const [display2, setDisplay2] = useState("d-none");
+	const [display, setDisplay] = useState(["d-block", "d-none"]);
 	const [player, setPlayer] = useState("");
 
 	return (
 		<div>
-			<div className={display1}>
+			<div className={display[0]}>
 				<div className="container d-flex flex-column justify-content-center">
 					<h3 className="align-self-start mx-auto">Pick A Weapon</h3>
 					<div className="view1 justify-content-center mx-auto">
@@ -30,8 +29,7 @@ export const View1 = () => {
 									<button
 										className="button-player1 display-4 mx-3 my-3 text-center"
 										onClick={() => {
-											setDisplay1("d-none");
-											setDisplay2("d-block");
+											setDisplay(["d-none", "d-block"]);
 											setPlayer("X");
 										}}>
 										<b>X</b>
@@ -39,8 +37,7 @@ export const View1 = () => {
 									<button
 										className="button-player2 display-4 mx-3 my-3 text-center"
 										onClick={() => {
-											setDisplay1("d-none");
-											setDisplay2("d-block");
+											setDisplay(["d-none", "d-block"]);
 											setPlayer("O");
 										}}>
 										<b>O</b>
@@ -52,7 +49,7 @@ export const View1 = () => {
 				</div>
 			</div>
 
-			<div className={display2}>
+			<div className={display[1]}>
 				<View2 player={player} />
 			</div>
 		</div>
