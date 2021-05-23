@@ -16,7 +16,10 @@ export const View2 = ({ player }) => {
 	const [winner, setWinner] = useState("");
 
 	useEffect(() => {
-		setWinner(`It is ${total_turns[i]} turn!`);
+		setWinner({
+			encabezado: `It is ${total_turns[i]} turn!`,
+			style: { color: "white" }
+		});
 	}, [player]);
 
 	// Función que evalua el ganador y actualiza el estado winner
@@ -37,16 +40,22 @@ export const View2 = ({ player }) => {
 				((fila == "XXX" || fila == "OOO") && fila !== "") ||
 				((columna == "XXX" || columna == "OOO") && columna != "")
 			) {
-				setWinner(`${total_turns[i - 1]} Wins!`);
+				setWinner({
+					encabezado: `${total_turns[i - 1].toLowerCase()} Wins!`,
+					style: { color: "#37C063" }
+				});
 				break;
 			} else {
 				ind += 3;
 				ind2 += 1;
-				setWinner(`It is ${total_turns[i]} turn!`);
+				setWinner({
+					encabezado: `It is ${total_turns[i]} turn!`,
+					style: { color: "white" }
+				});
 			}
 		}
 	};
-	console.log(total_turns);
+
 	// Pone la marca en la casilla y evalua si hay un ganador
 	const putMark = index => {
 		if (i < 9) {
@@ -56,6 +65,10 @@ export const View2 = ({ player }) => {
 			evaluateWinner();
 		}
 	};
+
+	// const startOver = () => {
+
+	// }
 
 	const tablero = total_casillas.map((item, index) => {
 		return (
@@ -70,7 +83,14 @@ export const View2 = ({ player }) => {
 
 	return (
 		<div className="container">
-			<h2>{winner}</h2>
+			<b>
+				<h2 style={winner.style}>{winner.encabezado}</h2>
+			</b>
+			<button
+				className="border rounded"
+				onClick={() => window.location.reload()}>
+				Start Over
+			</button>
 			<div className="mx-auto mt-4">
 				<div className="row mx-auto" style={{ width: "60%" }}>
 					{tablero}
